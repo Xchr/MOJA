@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<widget xmlns = "http://www.w3.org/ns/widgets"
+
+xmlns:gap   = "http://phonegap.com/ns/1.0"
+id          = "com.natescode.compass"
+version     = "1.0.0"
+versionCode = "10" >
+
+	<!-- versionCode is optional and Android only -->
+
+	<preference name="phonegap-version" value="3.6.3" />
+	<gap:plugin name="org.apache.cordova.device-orientation" />
+    <gap:plugin name="com.ququplay.websocket.websocket" version="0.1.0" />
+	<name>Compass</name>
+	<description>Basic Compass app</description>
+	<author href="http://sri.ait.ie" email="195504996@qq.com">Randy</author>
+</widget>
