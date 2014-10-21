@@ -1,0 +1,193 @@
+<html>
+<script>
+var x = [];
+var initm = 0;
+var initial = function (size){
+	//var initm = 0;
+	var inistm = Date.now();
+	var y = [];
+	while(size > 0) y.push(size--)
+	y.sort(function(){return .5 - Math.random()});
+	var inietm = Date.now();
+	initm = inietm - inistm;
+	console.log("Initialization takes: " + (inietm - inistm) + "ms");
+	return y;
+	
+	
+};
+console.log("test" + initm);
+function doinitial(){
+var randst = Date.now();
+var inp = document.getElementById("size").value;
+if(inp == 0){
+	alert("Please Input an integer greater than 0!!! Thanks!");
+	}else if(inp != x.length){
+		console.log("Size of array is: "+inp);
+		x = [];
+		//while(inp >0) x.push(inp--)
+		//x.sort(function(){return .5 - Math.random()});
+		x = initial(inp);
+		var randft = Date.now();
+	}else{
+console.log("Size of array is: "+inp);
+//for(var i = 0; i<inp;i++){
+//	if( inp != 0 && inp > x.length ){
+		
+//		var num = Math.floor((Math.random()*inp)+1);
+//		x[i] = num;		
+//		}
+//		else if( inp <= x.length){
+//			x = [];
+//			var num = Math.floor((Math.random()*inp)+1);
+//			x[i] = num;
+//			}
+//};
+	//while(inp >0) x.push(inp--)
+	//x.sort(function(){return .5 - Math.random()});
+	x = initial(inp);
+	var randft = Date.now();
+
+};
+console.log(x);
+
+console.log("Finish radonm at" + (new Date()));
+console.log("Random Number takes : " + (randft - randst) + "ms" );
+//console.log(initial(inp));
+};
+function showarray(){
+	document.getElementById("org").innerHTML = "The arrry is : " + x.toString();
+	console.log("Finish display at" + (new Date()));
+};
+var sttm = 0;
+var sorting = function (list) {
+    var stm = Date.now();
+    console.log("Start sorting at" + (new Date()));
+    var list1 = list.concat(rst); //gaidong
+    var rst = [];
+    var comparisons = 0,
+        swaps = 0,
+        endIndex = 0,
+        len = list1.length - 1,//gaidong
+        hasSwap = true;
+ 
+    for (var i = 0; i < len; i++) {
+ 
+        hasSwap = false;
+ 
+        for (var j = 0, swapping, endIndex = len - i; j < endIndex; j++) {
+            comparisons++;
+ 
+            if (list1[j] > list1[j + 1]) {//gaidong
+         
+                swapping = list1[j];//gaidong
+				
+                list1[j] = list1[j + 1];//gaidong
+                list1[j + 1] = swapping;//gaidong
+				hasSwap = true;
+				swaps++;
+                
+            };
+		rst = list1;	//gaidong
+        };
+ 
+        if (!hasSwap) {
+            break;
+        }
+    }
+ 
+    var fstm = Date.now();
+    sttm = fstm - stm;
+    console.log("Finish sorting at" + (new Date()));
+    console.log("The Sorting takes: " + (fstm - stm) + "ms");
+    console.log("--Bubble Sort--")
+    console.log("Comparisons: " + comparisons);
+    console.log("Swaps: " + swaps);
+                 
+    rst.pop();
+    return rst;
+};
+
+function dosort(){
+	var rt = sorting(x);
+	console.log(rt);
+	document.getElementById("rst").innerHTML = "The array is sorted : " + rt;
+	document.getElementById("cosl").innerHTML = "The sorting takes: " + sttm + "ms"+"<br>"+"Initialization takes: " + initm + "ms" ;
+};
+
+</script>
+<body>
+Input size of array: <input type="textfield" id="size"/> <button id="init" onclick="doinitial()">Initial</button> <br><br><br>
+<textarea id="org" rows="8" cols="100" readonly></textarea><br><br><br>
+<textarea id="rst" rows="8" cols="100" readonly></textarea><br><br><br>
+<button id="showarray" onclick="showarray()">Show Array</button><br><br><br>
+<button id="sortarray" onclick="dosort()">Sort Array</button><br><br><br>
+<button id="websocket" onclick="websocket()">WebSocketOffload</button><br><br><br>
+
+
+
+<div style="float:right"><p id="cosl"></p></div><br>
+<div style="float:right"><p id="nettm"></p></div> 
+</body>
+
+<script>
+	var hassend = false;
+	function websocket(){
+	window.WebSocket = window.WebSocket || window.MozWebSocket;
+	if(!window.WebSocket){
+		alert( "Sorry, the browser doesn\'t support websocket!!!");
+	}else{	
+		var ws = new WebSocket('ws://192.168.101.16:6789');	
+};
+var ofdstm;
+ws.onopen = function (e) {
+	console.log("Client connecting at " + (new Date()));
+	
+	console.log(hassend);
+	var arg1 = document.getElementById("size").value;
+	var fun1 = initial.toString(); 
+	//var arg1 = x;//.toString();
+	var fun2 = sorting.toString();
+	//console.log(fun1);
+	var msg = {flg:false,
+                   arg1: arg1,
+		   fun1: fun1,
+		   fun2: fun2,
+		};	
+	if(hassend === false){
+	ws.send(JSON.stringify(msg));
+	ofdstm = Date.now();
+	hassend=true;
+	console.log(hassend);
+	}
+	else if(hassend===true){
+	console.log("here!");
+	var msgagain = {flg:true,
+			arg1:arg1,
+			};
+	ws.send(JSON.stringify(msgagain));
+	ofdstm = Date.now();
+	};
+	//ws.send(msg);
+	//console.log(p1.toString(),p2.toString());
+	console.log("offloading to Server at " + (new Date()));
+	e.preventDefault();
+};
+ws.onmessage = function(ev){
+console.log("Response from server: "+ ev.data + (new Date()));
+var rst = JSON.parse(ev.data);
+//console.log(rst.rst2);
+var ofdetm = Date.now();
+var ofdtm = ofdetm - ofdstm;
+document.getElementById("nettm").innerHTML = "The offloading takes: " + ofdtm + "ms";
+document.getElementById("org").innerHTML = "The arrry is : " + rst.rst1;
+document.getElementById("rst").innerHTML = "The arrry is Sorted : " + rst.rst2;
+};
+
+};
+
+</script>
+
+
+
+
+</html>
