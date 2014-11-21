@@ -9,7 +9,8 @@ versionCode = "10" >
 	<!-- versionCode is optional and Android only -->
 
 	<preference name="phonegap-version" value="3.6.3" />
-	<!--<gap:plugin name="org.apache.cordova.device-orientation" /> It won't work without the webwocket plugin below for the phonegap!-->
+	<gap:plugin name="org.apache.cordova.device-orientation" />
+	<!-- It won't work without the webwocket plugin below for the phonegap!-->
     <gap:plugin name="com.ququplay.websocket.websocket" version="0.1.0" />
 	<name>MOJA Test</name>
 	<description>Test for MOJA framework</description>
