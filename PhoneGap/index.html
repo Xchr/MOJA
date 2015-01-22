@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
 		<script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-		<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+		<script type="text/javascript" charset="utf-8" src="/cordova.js"></script>
 		
 		
 </head>
@@ -127,7 +127,15 @@ function dosort(){
 
 </script>
 <body>
-Input size of array: <input type="textfield" id="size"/> <button id="init" onclick="doinitial()">Initial</button> <br><br><br>
+Input size of array: <input type="textfield" id="size"/> <button id="init" onclick="doinitial()">Initial</button> <br>
+    <select id="wsserver">
+        <option value="192.168.101.31">Sri</option>
+        <option value="193.1.13.14">Athlone</option>
+        <option value="193.1.201.26">Waterford</option>
+        <option value="141.20.103.211">Berlin</option>
+        <option value="203.159.63.249">Bangkok</option>
+        <option value="141.20.103.211">Sydney</option>
+    </select><br><br>
 <textarea id="org" rows="8" cols="100" readonly></textarea><br><br><br>
 <textarea id="rst" rows="8" cols="100" readonly></textarea><br><br><br>
 <button id="showarray" onclick="showarray()">Show Array</button><br><br><br>
@@ -143,11 +151,13 @@ Input size of array: <input type="textfield" id="size"/> <button id="init" oncli
 <script>
 	var hassend = false;
 	function websocket(){
+    //to get the chosen server by user
+        var wsip = document.getElementById("wsserver").value;
 	window.WebSocket = window.WebSocket || window.MozWebSocket;
 	if(!window.WebSocket){
 		alert( "Sorry, the browser doesn\'t support websocket!!!");
 	}else{	
-		var ws = new WebSocket('ws://193.1.13.14:6789');	
+		var ws = new WebSocket('ws://' + wsip + ':6789');	
 };
 var ofdstm;
 ws.onopen = function (e) {
